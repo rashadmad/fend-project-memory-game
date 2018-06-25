@@ -29,36 +29,38 @@ function shuffle(array) {
 const deck = document.querySelector('.deck');
 const card = document.querySelectorAll('.card');
 const match = document.querySelectorAll('.match');
+const open = document.querySelectorAll('.blah');
+let secoundCardClicked = false;
 
 //click action
 function checkMatch() {
   const clicked = this.classList;
 
+
   //makeing matched cards not apply as eventlisteners
   if(clicked.contains("match")){
     this.removeEventListener('click', checkMatch,false);
-  }
-  else if(clicked.contains("firstClicked")){
+} else {
+  const clicked = this.classList;
+  if (
 
-  } else {
     //takes note of first card clicked
-    this.classList.toggle("firstClicked");
 /*flipping of card*/
       this.classList.toggle("show");
       this.classList.toggle("open");
-
+      const firstCard = this;
     //takes note of secound card clicked
     //Check if theses are equal
-    if(firstCard === secoundCard){
     //if they are equal then add the class .match to both of them
-    this.classList.add("match");
-    }
   }
 };
 
 //adds eventlisteners to all of the cards
 for (var i = 0; i < card.length; i++) {
     card[i].addEventListener('click', checkMatch,false);
+    if(card[i].classList.contains("open");){
+      console.log("it Has it");
+    }
 }
 
 
