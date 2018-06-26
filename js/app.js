@@ -31,7 +31,8 @@ const card = document.querySelectorAll('.card');
 const match = document.querySelectorAll('.match');
 let firstNsecond = [];
 let matchFound = false;
-
+let firstCard = "";
+let secondCard = "";
 
 let secoundCardClicked = false;
 
@@ -39,22 +40,30 @@ let secoundCardClicked = false;
 function checkMatch() {
   const clicked = this.classList;
 
-
   //makeing matched cards not apply as eventlisteners
-  if (clicked.contains("match") || clicked.contains("match")) {
+  if (clicked.contains("match") || clicked.contains("show") || clicked.contains("open")) {
     this.removeEventListener('click', checkMatch, false);
 
   } else {
     this.classList.toggle("show");
     this.classList.toggle("open");
-    firstNsecond.push(this.children);
+    let myChild = this.innerHTML;
+    firstNsecond.push(myChild);
+
+    console.log(firstNsecond);
 
     if (firstNsecond.length === 2) {
       let firstCard = firstNsecond[0];
+      console.log(firstCard);
       let secondCard = firstNsecond[1];
+      console.log(firstCard + secondCard);
+
+      //emptys out the array
       firstNsecond = [];
-      if (firstCard == secondCard) {
-        console.log("works");
+      if (firstCard === secondCard) {
+        console.log("match found");
+      } else {
+        console.log("match not found");
       }
     }
   }
