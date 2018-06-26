@@ -12,24 +12,27 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
-
 
 const deck = document.querySelector('.deck');
 const card = document.querySelectorAll('.card');
 const match = document.querySelectorAll('.match');
-const open = document.querySelectorAll('.blah');
+let firstNsecond = [];
+let matchFound = false;
+
+
 let secoundCardClicked = false;
 
 //click action
@@ -38,36 +41,31 @@ function checkMatch() {
 
 
   //makeing matched cards not apply as eventlisteners
-  if(clicked.contains("match")){
-    this.removeEventListener('click', checkMatch,false);
-} else {
-  const clicked = this.classList;
-  if (
+  if (clicked.contains("match") || clicked.contains("match")) {
+    this.removeEventListener('click', checkMatch, false);
 
-    //takes note of first card clicked
-/*flipping of card*/
-      this.classList.toggle("show");
-      this.classList.toggle("open");
-      const firstCard = this;
-    //takes note of secound card clicked
-    //Check if theses are equal
-    //if they are equal then add the class .match to both of them
-  }
-};
+  } else {
+    this.classList.toggle("show");
+    this.classList.toggle("open");
+    firstNsecond.push(this.children);
 
-//adds eventlisteners to all of the cards
-for (var i = 0; i < card.length; i++) {
-    card[i].addEventListener('click', checkMatch,false);
-    if(card[i].classList.contains("open");){
-      console.log("it Has it");
+    if (firstNsecond.length === 2) {
+      let firstCard = firstNsecond[0];
+      let secondCard = firstNsecond[1];
+      firstNsecond = [];
+      if (firstCard == secondCard) {
+        console.log("works");
+      }
     }
+  }
 }
 
 
+//adds eventlisteners to all of the cards
+for (var i = 0; i < card.length; i++) {
+  card[i].addEventListener('click', checkMatch, false);
 
-
-
-
+}
 
 
 /*
