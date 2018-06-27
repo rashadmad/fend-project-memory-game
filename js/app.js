@@ -30,6 +30,7 @@ const deck = document.querySelector('.deck');
 const card = document.querySelectorAll('.card');
 const match = document.querySelectorAll('.match');
 let firstNsecond = [];
+let firstNsecondChildren = [];
 let matchFound = false;
 let firstCard = "";
 let secondCard = "";
@@ -47,23 +48,27 @@ function checkMatch() {
   } else {
     this.classList.toggle("show");
     this.classList.toggle("open");
-    let myChild = this.innerHTML;
-    firstNsecond.push(myChild);
-
-    console.log(firstNsecond);
+    clickedCard = this;
+    clickedCardChildren = this.innerHTML;
+    firstNsecond.push(clickedCard);
+    firstNsecondChildren.push(clickedCardChildren);
 
     if (firstNsecond.length === 2) {
-      let firstCard = firstNsecond[0];
+      let firstCard = firstNsecondChildren[0];
       console.log(firstCard);
-      let secondCard = firstNsecond[1];
+      let secondCard = firstNsecondChildren[1];
       console.log(firstCard + secondCard);
 
       //emptys out the array
-      firstNsecond = [];
+
       if (firstCard === secondCard) {
-        console.log("match found");
+          console.log(firstCard);
+          firstNsecondChildren = [];
+          firstNsecond = [];
       } else {
         console.log("match not found");
+        firstNsecondChildren = [];
+        firstNsecond = [];
       }
     }
   }
