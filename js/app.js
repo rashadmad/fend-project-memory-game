@@ -37,6 +37,13 @@ let secondCard = "";
 
 let secoundCardClicked = false;
 
+function flip(cardOne,cardTwo){
+  cardOne.toggle("show");
+  cardOne.toggle("open");
+  cardTwo.toggle("show");
+  cardTwo.toggle("open");
+}
+
 //click action
 function checkMatch() {
   const clicked = this.classList;
@@ -62,11 +69,16 @@ function checkMatch() {
       //emptys out the array
 
       if (firstCard === secondCard) {
-          console.log(firstCard);
+
+          console.log("match found");
           firstNsecondChildren = [];
           firstNsecond = [];
       } else {
         console.log("match not found");
+        firstCard = firstNsecond[0].classList;
+        secoundCard = firstNsecond[1].classList;
+        flip(firstCard,secoundCard,5000);
+          console.log(firstNsecond);
         firstNsecondChildren = [];
         firstNsecond = [];
       }
