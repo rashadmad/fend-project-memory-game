@@ -38,15 +38,18 @@ let secondCard = "";
 let secoundCardClicked = false;
 //flips the cards over after they have been compared
 function flip(cardMatch,cardOne,cardTwo){
-  
+
   if(cardMatch === true){
     cardOne.toggle("match");
     cardTwo.toggle("match");
   } else {
-    cardOne.toggle("open");
-    cardOne.toggle("show");
-    cardTwo.toggle("open");
-    cardTwo.toggle("show");
+    console.log(cardOne + "" + cardTwo);
+    setTimeout(function() {
+      cardOne.toggle("open");
+      cardOne.toggle("show");
+      cardTwo.toggle("open");
+      cardTwo.toggle("show");
+    }, 1000);
 
     }
 };
@@ -89,6 +92,7 @@ function checkMatch() {
           firstNsecond = [];
           //if the cards dont match they need to both be fliped over
       } else {
+
         flip(false,firstCard,secondCard);
           console.log(firstNsecond);
         //emptys out the arrays
