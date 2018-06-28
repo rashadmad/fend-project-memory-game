@@ -38,7 +38,7 @@ let secondCard = "";
 let secoundCardClicked = false;
 //flips the cards over after they have been compared
 function flip(cardMatch,cardOne,cardTwo){
-  cardMatch = true;
+  
   if(cardMatch === true){
     cardOne.toggle("match");
     cardTwo.toggle("match");
@@ -64,6 +64,9 @@ function checkMatch() {
     //flips the card over
     this.classList.toggle("show");
     this.classList.toggle("open");
+
+    //creates two arrays to hold the cards that were clicked and the classes of
+    //both card flips
     clickedCard = this;
     clickedCardChildren = this.innerHTML;
     firstNsecond.push(clickedCard);
@@ -80,17 +83,15 @@ function checkMatch() {
 
       //this checks if the two cards class
       if (firstCardChild === secondCardChild) {
-
           flip(true,firstCard,secondCard)
           //emptys out the arrays
           firstNsecondChildren = [];
           firstNsecond = [];
           //if the cards dont match they need to both be fliped over
       } else {
-        firstCard = firstNsecond[0].classList;
-        secondCard = firstNsecond[1].classList;
-        setTimeout(flip(false,firstCard,secondCard), 0);
+        flip(false,firstCard,secondCard);
           console.log(firstNsecond);
+        //emptys out the arrays
         firstNsecondChildren = [];
         firstNsecond = [];
       }
