@@ -36,18 +36,18 @@ let firstCard = "";
 let secondCard = "";
 
 let secoundCardClicked = false;
-
+//flips the cards over after they have been compared
 function flip(cardMatch,cardOne,cardTwo){
-  cardMatch = false;
-  if(cardMatch === false){
+  cardMatch = true;
+  if(cardMatch === true){
+    cardOne.toggle("match");
+    cardTwo.toggle("match");
+  } else {
     cardOne.toggle("open");
     cardOne.toggle("show");
     cardTwo.toggle("open");
     cardTwo.toggle("show");
-  } else {
-    cardOne.toggle("match");
-    cardTwo.toggle("match");
-    console.log("MatchFOund");
+
     }
 };
 
@@ -61,6 +61,7 @@ function checkMatch() {
     this.removeEventListener('click', checkMatch, false);
 
   } else {
+    //flips the card over
     this.classList.toggle("show");
     this.classList.toggle("open");
     clickedCard = this;
@@ -68,26 +69,27 @@ function checkMatch() {
     firstNsecond.push(clickedCard);
     firstNsecondChildren.push(clickedCardChildren);
 
+    //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
-      let firstCard = firstNsecondChildren[0];
-      console.log(firstCard);
-      let secondCard = firstNsecondChildren[1];
-      console.log(firstCard + secondCard);
 
-      //emptys out the array
+      //creates varibles that hold the inner classes of the two cards clicked
+      let firstCardChild = firstNsecondChildren[0];
+      let secondCardChild = firstNsecondChildren[1];
+      let firstCard = firstNsecond[0].classList;
+      let secondCard = firstNsecond[1].classList;
 
-      if (firstCard === secondCard) {
-          firstCard = firstNsecond[0].classList;
-          secondCard = firstNsecond[1].classList;
+      //this checks if the two cards class
+      if (firstCardChild === secondCardChild) {
 
-          console.log("match found" + firstCard + secondCard);
+          flip(true,firstCard,secondCard)
+          //emptys out the arrays
           firstNsecondChildren = [];
           firstNsecond = [];
+          //if the cards dont match they need to both be fliped over
       } else {
-        console.log("match not found");
         firstCard = firstNsecond[0].classList;
         secondCard = firstNsecond[1].classList;
-        setTimeout(flip(firstCard,secondCard), 0);
+        setTimeout(flip(false,firstCard,secondCard), 0);
           console.log(firstNsecond);
         firstNsecondChildren = [];
         firstNsecond = [];
