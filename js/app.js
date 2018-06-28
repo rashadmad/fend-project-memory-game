@@ -26,9 +26,10 @@ function shuffle(array) {
   return array;
 }
 
-const deck = document.querySelector('.deck');
-const card = document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.card');
+const deck = document.querySelectorAll('i');
 const match = document.querySelectorAll('.match');
+
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
@@ -44,6 +45,8 @@ function flip(cardMatch,cardOne,cardTwo){
     cardTwo.toggle("match");
   } else {
     console.log(cardOne + "" + cardTwo);
+    //this delay allows the user to see the secound card clicked before flipinng
+    //it back over
     setTimeout(function() {
       cardOne.toggle("open");
       cardOne.toggle("show");
@@ -105,9 +108,8 @@ function checkMatch() {
 
 
 //adds eventlisteners to all of the cards
-for (var i = 0; i < card.length; i++) {
-  card[i].addEventListener('click', checkMatch, false);
-
+for (var i = 0; i < cards.length; i++) {
+  cards[i].addEventListener('click', checkMatch, false);
 }
 
 
