@@ -26,10 +26,11 @@ function shuffle(array) {
   return array;
 }
 const cards = document.querySelectorAll('.card');
-const deck = document.querySelectorAll('.card').firstElementChild;
 const match = document.querySelectorAll('.match');
-
-console.log(deck);
+const deck = document.querySelector('.deck').querySelectorAll('i');
+const shuffledDeck = shuffle(Array.from(deck));
+console.log(shuffledDeck);
+deck.removeChild();
 
 let firstNsecond = [];
 let firstNsecondChildren = [];
