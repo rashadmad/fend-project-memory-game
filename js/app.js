@@ -26,11 +26,15 @@ function shuffle(array) {
   return array;
 }
 const cards = document.querySelectorAll('.card');
+const card = document.getElementsByClassName('card');
 const match = document.querySelectorAll('.match');
-const deck = document.querySelector('.deck').querySelectorAll('i');
-const shuffledDeck = shuffle(Array.from(deck));
-console.log(shuffledDeck);
-deck.removeChild();
+const deck = document.querySelectorAll('.fa');
+const newDeck = document.getElementById('mydeck').childNodes;
+
+for (var i = 4; i < deck.length; i++) {
+  deck[i].remove();
+}
+
 
 let firstNsecond = [];
 let firstNsecondChildren = [];
@@ -46,7 +50,6 @@ function flip(cardMatch,cardOne,cardTwo){
     cardOne.toggle("match");
     cardTwo.toggle("match");
   } else {
-    console.log(cardOne + "" + cardTwo);
     //this delay allows the user to see the secound card clicked before flipinng
     //it back over
     setTimeout(function() {
