@@ -31,9 +31,14 @@ const match = document.querySelectorAll('.match');
 const deck = document.querySelectorAll('.fa');
 const newDeck = document.getElementById('mydeck');
 
+
 for (var i = 4; i < deck.length; i++) {
-  deck[i].remove();
+
+    let newDeck = deck[i];
+
 }
+deck[0]remove();
+console.log(deck);
 
 
 let firstNsecond = [];
