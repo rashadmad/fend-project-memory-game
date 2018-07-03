@@ -34,9 +34,14 @@ const fontAweAll = document.querySelectorAll('.fa');
 
 
 //shuffles deck
-for (var i = deck.children.length; i >= 0; i--) {
-    deck.appendChild(deck.children[Math.random() * i | 0]);
+function reset(){
+  for (var i = deck.children.length; i >= 0; i--) {
+      deck.appendChild(deck.children[Math.random() * i | 0]);
+  }
 }
+
+let matchsMade = 0;
+reset();
 
 let firstNsecond = [];
 let firstNsecondChildren = [];
@@ -94,13 +99,16 @@ function checkMatch() {
       let firstCard = firstNsecond[0].classList;
       let secondCard = firstNsecond[1].classList;
 
-      //this checks if the two cards class
+      //this checks if the two cards match
       if (firstCardChild === secondCardChild) {
+          //when a match is found
+          matchsMade += 1;
           flip(true,firstCard,secondCard)
           //emptys out the arrays
           firstNsecondChildren = [];
           firstNsecond = [];
           //if the cards dont match they need to both be fliped over
+          console.log(matchsMade);
       } else {
 
         flip(false,firstCard,secondCard);
@@ -113,6 +121,9 @@ function checkMatch() {
   }
 }
 
+if (matchsMade === 8){
+  console.log("you win");
+}
 
 //adds eventlisteners to all of the cards
 for (var i = 0; i < cards.length; i++) {
