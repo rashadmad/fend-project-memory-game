@@ -32,18 +32,31 @@ const deck = document.querySelector('.deck');
 const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
 const moves = document.querySelector('.moves');
+const resetButton = document.querySelector('.fa-repeat');
 let movesText = document.querySelector('.moves').textContent;
 let counter = 0;
+let matchsMade = 0;
+
+let movesText = document.querySelector('.moves').textContent = counter.toString();
+resetButton.addEventListener('click', reset, false);
 
 
 //shuffles deck
 function reset() {
+  counter = 0;
+  matchsMade = 0;
   for (var i = deck.children.length; i >= 0; i--) {
     deck.appendChild(deck.children[Math.random() * i | 0]);
   }
+  //checks all of the cards for matchs after finding any it set them back to normal
+  for (var i = 0; i < cards.length; i++) {
+    console.log();
+    if(cards[i].classList.contains("match")){
+      cards[i].classList.remove("match","open","show");
+    }
+  }
 }
 
-let matchsMade = 0;
 reset();
 
 let firstNsecond = [];
@@ -78,7 +91,6 @@ function checkMatch() {
   //progresses a counter attached to the moves span
   counter++;
   //manipulates the dom to update the moves span number
-  let movesText = document.querySelector('.moves').textContent = counter.toString();
 
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
