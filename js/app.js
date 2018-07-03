@@ -38,25 +38,26 @@ let counter = 0;
 let matchsMade = 0;
 
 resetButton.addEventListener('click', reset, false);
+resetButton.addEventListener('onload', reset, false);
 
 
 //shuffles deck
 function reset() {
   counter = 0;
   matchsMade = 0;
+  let movesText = document.querySelector('.moves').textContent = counter.toString();
+  movesText = 0;
   for (var i = deck.children.length; i >= 0; i--) {
     deck.appendChild(deck.children[Math.random() * i | 0]);
   }
   //checks all of the cards for matchs after finding any it set them back to normal
   for (var i = 0; i < cards.length; i++) {
     console.log();
-    if(cards[i].classList.contains("match")){
+    if(cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")){
       cards[i].classList.remove("match","open","show");
     }
   }
 }
-
-reset();
 
 let firstNsecond = [];
 let firstNsecondChildren = [];
