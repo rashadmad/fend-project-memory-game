@@ -103,26 +103,24 @@ function checkMatch() {
       if (firstCardChild === secondCardChild) {
           //when a match is found
           matchsMade += 1;
+          console.log(matchsMade);
+            if (matchsMade === 8){
+              console.log("you win");
+            }
           flip(true,firstCard,secondCard)
           //emptys out the arrays
           firstNsecondChildren = [];
           firstNsecond = [];
           //if the cards dont match they need to both be fliped over
-          console.log(matchsMade);
       } else {
 
         flip(false,firstCard,secondCard);
-          console.log(firstNsecond);
         //emptys out the arrays
         firstNsecondChildren = [];
         firstNsecond = [];
       }
     }
   }
-}
-
-if (matchsMade === 8){
-  console.log("you win");
 }
 
 //adds eventlisteners to all of the cards
