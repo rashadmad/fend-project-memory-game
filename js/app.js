@@ -31,12 +31,15 @@ const match = document.querySelectorAll('.match');
 const deck = document.querySelector('.deck');
 const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
+const moves = document.querySelector('.moves');
+let movesText = document.querySelector('.moves').textContent;
+let counter = 0;
 
 
 //shuffles deck
-function reset(){
+function reset() {
   for (var i = deck.children.length; i >= 0; i--) {
-      deck.appendChild(deck.children[Math.random() * i | 0]);
+    deck.appendChild(deck.children[Math.random() * i | 0]);
   }
 }
 
@@ -51,9 +54,9 @@ let secondCard = "";
 
 let secoundCardClicked = false;
 //flips the cards over after they have been compared
-function flip(cardMatch,cardOne,cardTwo){
+function flip(cardMatch, cardOne, cardTwo) {
 
-  if(cardMatch === true){
+  if (cardMatch === true) {
     cardOne.toggle("match");
     cardTwo.toggle("match");
   } else {
@@ -66,14 +69,18 @@ function flip(cardMatch,cardOne,cardTwo){
       cardTwo.toggle("show");
     }, 1000);
 
-    }
+  }
 };
 
 
 //click action
 function checkMatch() {
-  const clicked = this.classList;
+  //progresses a counter attached to the moves span
+  counter++;
+  //manipulates the dom to update the moves span number
+  let movesText = document.querySelector('.moves').textContent = counter.toString();
 
+  const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
   if (clicked.contains("match") || clicked.contains("show") || clicked.contains("open")) {
     this.removeEventListener('click', checkMatch, false);
@@ -101,20 +108,21 @@ function checkMatch() {
 
       //this checks if the two cards match
       if (firstCardChild === secondCardChild) {
-          //when a match is found
-          matchsMade += 1;
-          console.log(matchsMade);
-            if (matchsMade === 8){
-              console.log("you win");
-            }
-          flip(true,firstCard,secondCard)
-          //emptys out the arrays
-          firstNsecondChildren = [];
-          firstNsecond = [];
-          //if the cards dont match they need to both be fliped over
+
+        //when a match is found
+        matchsMade += 1;
+        console.log(matchsMade + " matchs made");
+        if (matchsMade === 8) {
+          console.log("you win");
+        }
+        flip(true, firstCard, secondCard)
+        //emptys out the arrays
+        firstNsecondChildren = [];
+        firstNsecond = [];
+        //if the cards dont match they need to both be fliped over
       } else {
 
-        flip(false,firstCard,secondCard);
+        flip(false, firstCard, secondCard);
         //emptys out the arrays
         firstNsecondChildren = [];
         firstNsecond = [];
