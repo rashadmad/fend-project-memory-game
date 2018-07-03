@@ -33,11 +33,10 @@ const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
 const moves = document.querySelector('.moves');
 const resetButton = document.querySelector('.fa-repeat');
-let movesText = document.querySelector('.moves').textContent;
+
 let counter = 0;
 let matchsMade = 0;
 
-let movesText = document.querySelector('.moves').textContent = counter.toString();
 resetButton.addEventListener('click', reset, false);
 
 
@@ -91,6 +90,7 @@ function checkMatch() {
   //progresses a counter attached to the moves span
   counter++;
   //manipulates the dom to update the moves span number
+  let movesText = document.querySelector('.moves').textContent = counter.toString();
 
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
