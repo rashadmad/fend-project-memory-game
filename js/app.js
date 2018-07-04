@@ -24,7 +24,7 @@ const overlayHeader = document.createElement("h1").textContent = "Congratulation
 
 let counter = 0;
 let matchsMade = 0;
-let starRating = 0;
+let starRating = 3;
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
@@ -58,7 +58,8 @@ function win() {
   setTimeout(function() {
     const str = '<h1 id="congrats">' + 'Congratulations' + '</li>' +
       '<br>' + '<p class = "blue">' + 'Your score was </p>' +
-      '<p></p>' +
+      '<p class = "blue">your star rating is ' + starRating + ' it took you ' + counter + ' moves to finsh</p>' +
+      '<p>Thank you for playing</p>'
       '<p class="blue">Would you like to play agin?</p>' +
       '<button onclick="completionReset()">Play Agin</button>';
     console.log(overlay.parentElement);
@@ -69,7 +70,7 @@ function win() {
     document.body.appendChild(overlay);
   }, 1000);
 }
-win();
+
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
@@ -119,9 +120,7 @@ function checkMatch() {
     thirdStar.classList.toggle("far");
     starRating++;
   }
-  if(starRating>=1){
 
-  }
   //manipulates the dom to update the moves span number
   let movesText = document.querySelector('.moves').textContent = counter.toString();
 
