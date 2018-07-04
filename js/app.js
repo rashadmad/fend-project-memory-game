@@ -10,21 +10,6 @@
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue, randomIndex;
-
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
 const cards = document.querySelectorAll('.card');
 const card = document.querySelector('.card');
 const match = document.querySelectorAll('.match');
@@ -34,14 +19,16 @@ const fontAweAll = document.querySelectorAll('.fa');
 const moves = document.querySelector('.moves');
 const resetButton = document.querySelector('.fa-repeat');
 
+const overlay = document.createElement("div");
+const overlayHeader = document.createElement("h1").textContent = "Congratulations";
+
 let counter = 0;
 let matchsMade = 0;
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
 
-
-//shuffles deck
+//shuffles the cards upon page load upon press of the reset button or on page load
 function reset() {
   counter = 0;
   matchsMade = 0;
@@ -53,11 +40,27 @@ function reset() {
   //checks all of the cards for matchs after finding any it set them back to normal
   for (var i = 0; i < cards.length; i++) {
     console.log();
-    if(cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")){
-      cards[i].classList.remove("match","open","show");
+    if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
+      cards[i].classList.remove("match", "open", "show");
     }
   }
 }
+
+  function win(){
+    setTimeout(function() {
+     const str = '<h1 id="congrats">' + 'Congratulations' + '</li>' +
+     '<br>' + '<p class = "blue">' + 'Your score was ' + 'score' +'</p>' + '<br>'+
+     '<p class="blue">would you like to play agin?</p>' + '<br>' +
+     '<button>play agin</button>';
+     overlay.innerHTML = str;
+     overlay.setAttribute("id","overlay");
+     overlay.setAttribute("class", "overlay");
+     document.body.appendChild(overlay);
+      console.log("you win!!!");
+    }, 1000);
+  }
+
+  win();
 
 let firstNsecond = [];
 let firstNsecondChildren = [];
@@ -126,7 +129,8 @@ function checkMatch() {
         matchsMade += 1;
         console.log(matchsMade + " matchs made");
         if (matchsMade === 8) {
-          console.log("you win");
+          //yay you win
+          win();
         }
         flip(true, firstCard, secondCard)
         //emptys out the arrays
