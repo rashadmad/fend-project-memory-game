@@ -24,6 +24,7 @@ const overlayHeader = document.createElement("h1").textContent = "Congratulation
 
 let counter = 0;
 let matchsMade = 0;
+let starRating = 0;
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
@@ -99,20 +100,27 @@ function flip(cardMatch, cardOne, cardTwo) {
 function checkMatch() {
   //progresses a counter attached to the moves span
   counter++;
-  if (counter>=30){
+
+  if (counter==30){
     const firstStar = document.querySelector('#first');
-    firstStar.classList.remove("fa");
-    firstStar.classList.add("far");
+    firstStar.classList.toggle("fa");
+    firstStar.classList.toggle("far");
+    starRating++;
   }
-  if (counter>=40){
+  if (counter==40){
     const secoundStar = document.querySelector('#secound');
-    secoundStar.classList.remove("fa");
-    secoundStar.classList.add("far");
+    secoundStar.classList.toggle("fa");
+    secoundStar.classList.toggle("far");
+    starRating++;
   }
-  if (counter>=60){
+  if (counter==60){
     const thirdStar = document.querySelector('#third');
-    thirdStar.classList.remove("fa");
-    thirdStar.classList.add("far");
+    thirdStar.classList.toggle("fa");
+    thirdStar.classList.toggle("far");
+    starRating++;
+  }
+  if(starRating>=1){
+
   }
   //manipulates the dom to update the moves span number
   let movesText = document.querySelector('.moves').textContent = counter.toString();
