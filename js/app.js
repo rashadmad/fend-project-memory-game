@@ -28,8 +28,14 @@ let matchsMade = 0;
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
 
+function completionReset(){
+  overlay.parentElement.removeChild(overlay);
+  console.log("works");
+  reset();
+}
+
 //shuffles the cards upon page load upon press of the reset button or on page load
-function reset() {
+function reset(overlayOpen) {
   counter = 0;
   matchsMade = 0;
   let movesText = document.querySelector('.moves').textContent = counter.toString();
@@ -39,29 +45,30 @@ function reset() {
   }
   //checks all of the cards for matchs after finding any it set them back to normal
   for (var i = 0; i < cards.length; i++) {
-    console.log();
+
     if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
+      console.log("system Fire");
       cards[i].classList.remove("match", "open", "show");
     }
   }
 }
 
-  function win(){
-    setTimeout(function() {
-     const str = '<h1 id="congrats">' + 'Congratulations' + '</li>' +
-     '<br>' + '<p class = "blue">' + 'Your score was ' + 'score' +'</p>' + '<br>'+
-     '<p class="blue">would you like to play agin?</p>' + '<br>' +
-     '<button>play agin</button>';
-     overlay.innerHTML = str;
-     overlay.setAttribute("id","overlay");
-     overlay.setAttribute("class", "overlay");
-     document.body.appendChild(overlay);
-      console.log("you win!!!");
-    }, 1000);
-  }
+function win() {
+  setTimeout(function() {
+    const str = '<h1 id="congrats">' + 'Congratulations' + '</li>' +
+      '<br>' + '<p class = "blue">' + 'Your score was </p>' +
+      '<p></p>' +
+      '<p class="blue">Would you like to play agin?</p>' +
+      '<button onclick="completionReset()">Play Agin</button>';
+    console.log(overlay.parentElement);
 
-  win();
-
+    overlay.innerHTML = str;
+    overlay.setAttribute("id", "overlay");
+    overlay.setAttribute("class", "overlay");
+    document.body.appendChild(overlay);
+  }, 1000);
+}
+win();
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
@@ -88,11 +95,25 @@ function flip(cardMatch, cardOne, cardTwo) {
   }
 };
 
-
 //click action
 function checkMatch() {
   //progresses a counter attached to the moves span
   counter++;
+  if (counter>=30){
+    const firstStar = document.querySelector('#first');
+    firstStar.classList.remove("fa");
+    firstStar.classList.add("far");
+  }
+  if (counter>=40){
+    const secoundStar = document.querySelector('#secound');
+    secoundStar.classList.remove("fa");
+    secoundStar.classList.add("far");
+  }
+  if (counter>=60){
+    const thirdStar = document.querySelector('#third');
+    thirdStar.classList.remove("fa");
+    thirdStar.classList.add("far");
+  }
   //manipulates the dom to update the moves span number
   let movesText = document.querySelector('.moves').textContent = counter.toString();
 
