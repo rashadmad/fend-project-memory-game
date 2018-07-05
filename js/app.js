@@ -18,6 +18,7 @@ const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
 const moves = document.querySelector('.moves');
 const resetButton = document.querySelector('.fa-repeat');
+const playAginButton = document.createElement("button").textContent = "Play Agin";
 
 const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
@@ -56,21 +57,23 @@ function reset(overlayOpen) {
 
 function win() {
   setTimeout(function() {
-    const str = '<h1 id="congrats">' + 'Congratulations' + '</li>' +
-      '<br>' + '<p class = "blue">' + 'Your score was </p>' +
-      '<p class = "blue">your star rating is ' + starRating + ' it took you ' + counter + ' moves to finsh</p>' +
-      '<p>Thank you for playing</p>'
-      '<p class="blue">Would you like to play agin?</p>' +
-      '<button onclick="completionReset()">Play Agin</button>';
+    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' +
+      '<p class = "blue">Your star rating is ' + starRating + '</p>' +
+      '<p class = "blue"> it took you ' + counter + ' moves to finsh</p>' +
+      '<h1>Thank you for playing</h1>'
+      '<p class="blue">Would you like to play agin?</p><br>' +
+      '<button>Play Agin</button>' +
+      '<i class="far fa-thumbs-up"></i>' + '</div>';
     console.log(overlay.parentElement);
 
     overlay.innerHTML = str;
     overlay.setAttribute("id", "overlay");
     overlay.setAttribute("class", "overlay");
     document.body.appendChild(overlay);
+    const overlayContainer = document.querySelector('#congrats');
   }, 1000);
 }
-
+win();
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
