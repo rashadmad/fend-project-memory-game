@@ -9,19 +9,24 @@ html {
 }
 button {
    background-color: #33B5E5; /* Blue */
-   border: none;
    color: white;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   cursor:pointer;
+   border: none;
+   border-radius: 2px;
+   padding: 10px;
+   -moz-box-shadow:     2px 2px 2px #91A691;
+   -webkit-box-shadow:  2px 2px 2px #91A691;
+   box-shadow:          2px 2px 2px #91A691;
+
 }
 .overlay
 {
 
 
+}
+.fa-thumbs-up {
+  font-size: 55px;
+  margin-bottom: 15px;
+  far fa-thumbs-up;
 }
 #congrats {
   text-align: center;
@@ -32,7 +37,6 @@ button {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  height: 50%;
   z-index: 100;
   -moz-box-shadow:     0 0 10px #000000;
   -webkit-box-shadow:  0 0 10px #000000;

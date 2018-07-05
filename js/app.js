@@ -57,13 +57,7 @@ function reset(overlayOpen) {
 
 function win() {
   setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' +
-      '<p class = "blue">Your star rating is ' + starRating + '</p>' +
-      '<p class = "blue"> it took you ' + counter + ' moves to finsh</p>' +
-      '<h1>Thank you for playing</h1>'
-      '<p class="blue">Would you like to play agin?</p><br>' +
-      '<button>Play Agin</button>' +
-      '<i class="far fa-thumbs-up"></i>' + '</div>';
+    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button onclick = winReset()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
 
     overlay.innerHTML = str;
@@ -73,7 +67,12 @@ function win() {
     const overlayContainer = document.querySelector('#congrats');
   }, 1000);
 }
-win();
+
+function winReset(){
+  document.body.removeChild(overlay);
+  reset();
+}
+
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
