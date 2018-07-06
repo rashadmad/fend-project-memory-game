@@ -16,9 +16,12 @@ const match = document.querySelectorAll('.match');
 const deck = document.querySelector('.deck');
 const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
-const moves = document.querySelector('.moves');
 const resetButton = document.querySelector('.fa-repeat');
 const playAginButton = document.createElement("button").textContent = "Play Agin";
+const firstStar = document.querySelector('#first');
+const secoundStar = document.querySelector('#secound');
+const thirdStar = document.querySelector('#third');
+let movesText = document.querySelector('#moves');
 
 const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
@@ -40,8 +43,11 @@ function completionReset(){
 function reset(overlayOpen) {
   counter = 0;
   matchsMade = 0;
-  let movesText = document.querySelector('.moves').textContent = counter.toString();
-  movesText = 0;
+  starRating = 3;
+  movesText = counter.toString();
+
+  pointSystem(false,true);
+
   for (var i = deck.children.length; i >= 0; i--) {
     deck.appendChild(deck.children[Math.random() * i | 0]);
   }
@@ -73,6 +79,29 @@ function winReset(){
   reset();
 }
 
+function pointSystem(all,resetPressed,star){
+if(all){
+  firstStar.classList.toggle("fa");
+  firstStar.classList.toggle("far");
+  secoundStar.classList.toggle("fa");
+  secoundStar.classList.toggle("far");
+  thirdStar.classList.toggle("fa");
+  thirdStar.classList.toggle("far");
+} else if (resetPressed){
+
+  firstStar.classList.add("fa");
+  firstStar.classList.remove("far");
+  secoundStar.classList.add("fa");
+  secoundStar.classList.remove("far");
+  thirdStar.classList.add("fa");
+  thirdStar.classList.remove("far");
+} else {
+    star.classList.toggle("fa");
+    star.classList.toggle("far");
+  }
+}
+
+
 let firstNsecond = [];
 let firstNsecondChildren = [];
 let matchFound = false;
@@ -95,7 +124,6 @@ function flip(cardMatch, cardOne, cardTwo) {
       cardTwo.toggle("open");
       cardTwo.toggle("show");
     }, 1000);
-
   }
 };
 
@@ -105,26 +133,20 @@ function checkMatch() {
   counter++;
 
   if (counter==30){
-    const firstStar = document.querySelector('#first');
-    firstStar.classList.toggle("fa");
-    firstStar.classList.toggle("far");
-    starRating++;
+    pointSystem(false,false,firstStar);
+    starRating--;
   }
   if (counter==40){
-    const secoundStar = document.querySelector('#secound');
-    secoundStar.classList.toggle("fa");
-    secoundStar.classList.toggle("far");
-    starRating++;
+    pointSystem(false,false,secoundStar);
+    starRating--;
   }
   if (counter==60){
-    const thirdStar = document.querySelector('#third');
-    thirdStar.classList.toggle("fa");
-    thirdStar.classList.toggle("far");
-    starRating++;
+    pointSystem(false,false,thirdStar);
+    starRating--;
   }
 
   //manipulates the dom to update the moves span number
-  let movesText = document.querySelector('.moves').textContent = counter.toString();
+  movesText = document.querySelector('#moves').textContent = counter;
 
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
