@@ -150,10 +150,7 @@ function checkMatch() {
 
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
-  if (clicked.contains("match") || clicked.contains("show") || clicked.contains("open")) {
-    this.removeEventListener('click', checkMatch, false);
-
-  } else {
+  else {
     //flips the card over
     this.classList.toggle("show");
     this.classList.toggle("open");
@@ -202,7 +199,12 @@ function checkMatch() {
 
 //adds eventlisteners to all of the cards
 for (var i = 0; i < cards.length; i++) {
-  cards[i].addEventListener('click', checkMatch, false);
+
+  if(cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")){
+    cards[i].removeEventListner('click', checkMatch, false);
+  } else {
+    cards[i].addEventListener('click', checkMatch, false);
+  }
 }
 
 
