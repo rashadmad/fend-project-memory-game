@@ -48,11 +48,11 @@ function reset(overlayOpen) {
 
   pointSystem(false,true);
 
-  for (var i = deck.children.length; i >= 0; i--) {
+  for (let i = deck.children.length; i >= 0; i--) {
     deck.appendChild(deck.children[Math.random() * i | 0]);
   }
   //checks all of the cards for matchs after finding any it set them back to normal
-  for (var i = 0; i < cards.length; i++) {
+  for (let i = 0; i < cards.length; i++) {
 
     if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
       console.log("system Fire");
@@ -168,7 +168,7 @@ function checkMatch() {
     //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
 
-      //creates varibles that hold the inner classes of the two cards clicked
+      //creates letibles that hold the inner classes of the two cards clicked
       let firstCardChild = firstNsecondChildren[0];
       let secondCardChild = firstNsecondChildren[1];
       let firstCard = firstNsecond[0].classList;
@@ -201,7 +201,7 @@ function checkMatch() {
 }
 
 //adds eventlisteners to all of the cards
-for (var i = 0; i < cards.length; i++) {
+for (let i = 0; i < cards.length; i++) {
   cards[i].addEventListener('click', checkMatch, false);
 }
 
