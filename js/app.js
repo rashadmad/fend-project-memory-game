@@ -129,21 +129,6 @@ function flip(cardMatch, cardOne, cardTwo) {
 
 //click action
 function checkMatch() {
-  //progresses a counter attached to the moves span
-  counter++;
-
-  if (counter==30){
-    pointSystem(false,false,firstStar);
-    starRating--;
-  }
-  if (counter==40){
-    pointSystem(false,false,secoundStar);
-    starRating--;
-  }
-  if (counter==60){
-    pointSystem(false,false,thirdStar);
-    starRating--;
-  }
 
   //manipulates the dom to update the moves span number
   movesText = document.querySelector('#moves').textContent = counter;
@@ -167,7 +152,7 @@ function checkMatch() {
 
     //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
-
+      counter++;
       //creates letibles that hold the inner classes of the two cards clicked
       let firstCardChild = firstNsecondChildren[0];
       let secondCardChild = firstNsecondChildren[1];
@@ -199,6 +184,22 @@ function checkMatch() {
     }
   }
 }
+
+//progresses a counter attached to the moves span
+
+if (counter==16){
+  pointSystem(false,false,firstStar);
+  starRating--;
+}
+if (counter==32){
+  pointSystem(false,false,secoundStar);
+  starRating--;
+}
+if (counter==60){
+  pointSystem(false,false,thirdStar);
+  starRating--;
+}
+
 
 //adds eventlisteners to all of the cards
 for (let i = 0; i < cards.length; i++) {
