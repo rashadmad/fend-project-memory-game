@@ -21,6 +21,7 @@ const playAginButton = document.createElement("button").textContent = "Play Agin
 const firstStar = document.querySelector('#first');
 const secoundStar = document.querySelector('#secound');
 const thirdStar = document.querySelector('#third');
+const clock = document.createElement("TIME");
 let movesText = document.querySelector('#moves');
 
 const overlay = document.createElement("div");
@@ -29,6 +30,34 @@ const overlayHeader = document.createElement("h1").textContent = "Congratulation
 let counter = 0;
 let matchsMade = 0;
 let starRating = 3;
+
+let sec = 0;
+let min = 0;
+  setInterval(function(){
+    sec++
+    console.log(sec + " secounds");
+    if(sec === 60) {
+      sec = 0;
+    }
+  }, 1000);
+
+  setInterval(function(){
+    min++
+    console.log(min + " minutes");
+  }, 60000);
+
+//  let min = function() {
+//    if(sec === 9){
+//      console.log("blah");
+//    }
+//  }
+
+
+
+
+
+
+document.body.appendChild(clock);
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
@@ -187,15 +216,15 @@ function checkMatch() {
 
 //progresses a counter attached to the moves span
 
-if (counter==16){
+if (counter==15){
   pointSystem(false,false,firstStar);
   starRating--;
 }
-if (counter==32){
+if (counter==20){
   pointSystem(false,false,secoundStar);
   starRating--;
 }
-if (counter==60){
+if (counter==30){
   pointSystem(false,false,thirdStar);
   starRating--;
 }
