@@ -22,6 +22,7 @@ const firstStar = document.querySelector('#first');
 const secoundStar = document.querySelector('#secound');
 const thirdStar = document.querySelector('#third');
 const clock = document.createElement("TIME");
+const myScorePanel = document.querySelector('.score-panel');
 let movesText = document.querySelector('#moves');
 
 const overlay = document.createElement("div");
@@ -33,6 +34,7 @@ let starRating = 3;
 
 let sec = 0;
 let min = 0;
+
   setInterval(function(){
     sec++
     console.log(sec + " secounds");
@@ -46,18 +48,8 @@ let min = 0;
     console.log(min + " minutes");
   }, 60000);
 
-//  let min = function() {
-//    if(sec === 9){
-//      console.log("blah");
-//    }
-//  }
-
-
-
-
-
-
-document.body.appendChild(clock);
+clock.innerHTML ='<i class="far fa-clock" style="margin-left: 9px; font-size: 1.1rem;"></i> ' + min +' min' + '  ' + sec + ' sec';
+myScorePanel.appendChild(clock);
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
