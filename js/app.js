@@ -69,10 +69,13 @@ function completionReset(){
 //shuffles the cards upon page load upon press of the reset button or on page load
 function reset(overlayOpen) {
   //resets all of these varibles back to there default values
-  counter = 0;
+  sec = 0;
+  min = 0;
   matchsMade = 0;
   starRating = 3;
-  movesText = counter.toString();
+  //resets the moves counter
+  counter = 0;
+  movesText.textContent = counter;
 
   pointSystem(false,true);
 
@@ -159,11 +162,10 @@ function flip(cardMatch, cardOne, cardTwo) {
 function checkMatch() {
 
   //manipulates the dom to update the moves span number
-  movesText = document.querySelector('#moves').textContent = counter;
-
+  movesText.textContent = counter;
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
-  if (clicked.contains("match") || clicked.contains("show") || clicked.contains("open")) {
+  if (clicked.contains("match")) {
     this.removeEventListener('click', checkMatch, false);
 
   } else {
