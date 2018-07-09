@@ -36,35 +36,23 @@ let starRating = 0;
 let sec = 0;
 let min = 0;
 
-setInterval(function(){
-
+let timer = setInterval(function(){
   sec++;
   if(sec === 60){
-    sec = 0;
+    min++;
   }
-  secHolder.textContent = sec + " sec";
+
+  minHolder.textContent = min + " min";
+  secHolder.textContent = " " + sec + " sec";
 
 }, 1000);
-
-setInterval(function(){
-
-  min++;
-  minHolder.textContent = min + " min";
-
-}, 60000);
 
 myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
 clock.appendChild(minHolder);
 clock.appendChild(secHolder);
 
-resetButton.addEventListener('click', reset, false);
-resetButton.addEventListener('onload', reset, false);
 
-function completionReset(){
-  overlay.parentElement.removeChild(overlay);
-  console.log("works");
-  reset();
-}
+resetButton.addEventListener('click', reset);
 
 //shuffles the cards upon page load upon press of the reset button or on page load
 function reset(overlayOpen) {
@@ -76,7 +64,6 @@ function reset(overlayOpen) {
   //resets the moves counter
   counter = 0;
   movesText.textContent = counter;
-
   pointSystem(false,true);
 
   for (let i = deck.children.length; i >= 0; i--) {
@@ -92,9 +79,17 @@ function reset(overlayOpen) {
   }
 }
 
+///play agin button starts the game over agin
+function playAgin(){
+document.body.removeChild(overlay);
+reset();
+}
+
 function win() {
+
+  clearInterval(timer);
   setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button onclick = winReset()>Play Again</button>' + '</div>';
+    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
 
     overlay.innerHTML = str;
@@ -103,11 +98,6 @@ function win() {
     document.body.appendChild(overlay);
     const overlayContainer = document.querySelector('#congrats');
   }, 1000);
-}
-
-function winReset(){
-  document.body.removeChild(overlay);
-  reset();
 }
 
 function pointSystem(all,resetPressed,star){
