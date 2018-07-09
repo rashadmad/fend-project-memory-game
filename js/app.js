@@ -23,6 +23,8 @@ const secoundStar = document.querySelector('#secound');
 const thirdStar = document.querySelector('#third');
 const clock = document.createElement("TIME");
 const myScorePanel = document.querySelector('.score-panel');
+const minHolder = document.createElement("span");
+const secHolder = document.createElement("span");
 let movesText = document.querySelector('#moves');
 
 const overlay = document.createElement("div");
@@ -30,26 +32,30 @@ const overlayHeader = document.createElement("h1").textContent = "Congratulation
 
 let counter = 0;
 let matchsMade = 0;
-let starRating = 3;
-
+let starRating = 0;
 let sec = 0;
 let min = 0;
 
-  setInterval(function(){
-    sec++
-    console.log(sec + " secounds");
-    if(sec === 60) {
-      sec = 0;
-    }
-  }, 1000);
+setInterval(function(){
 
-  setInterval(function(){
-    min++
-    console.log(min + " minutes");
-  }, 60000);
+  sec++;
+  if(sec === 60){
+    sec = 0;
+  }
+  secHolder.textContent = sec + " sec";
 
-clock.innerHTML ='<i class="far fa-clock" style="margin-left: 9px; font-size: 1.1rem;"></i> ' + min +' min' + '  ' + sec + ' sec';
-myScorePanel.appendChild(clock);
+}, 1000);
+
+setInterval(function(){
+
+  min++;
+  minHolder.textContent = min + " min";
+
+}, 60000);
+
+myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
+clock.appendChild(minHolder);
+clock.appendChild(secHolder);
 
 resetButton.addEventListener('click', reset, false);
 resetButton.addEventListener('onload', reset, false);
@@ -62,6 +68,7 @@ function completionReset(){
 
 //shuffles the cards upon page load upon press of the reset button or on page load
 function reset(overlayOpen) {
+  //resets all of these varibles back to there default values
   counter = 0;
   matchsMade = 0;
   starRating = 3;
