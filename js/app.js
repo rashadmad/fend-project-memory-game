@@ -80,7 +80,8 @@ function reset() {
   //resets the moves counter
   counter = 0;
   movesText.textContent = counter;
-  pointSystem(false, true);
+
+  pointSystem(true);
 
   shufflesDeck();
   //checks all of the cards for matchs after finding any it sets them back to normal
@@ -106,46 +107,17 @@ function win() {
   clearInterval(myTimer);
   let myMin = minHolder.textContent;
   let mySec = secHolder.textContent;
+
   setTimeout(function() {
     const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
-
+    pointSystem(true);
     overlay.innerHTML = str;
     overlay.setAttribute("id", "overlay");
     overlay.setAttribute("class", "overlay");
     document.body.appendChild(overlay);
     const overlayContainer = document.querySelector('#congrats');
   }, 1000);
-}
-
-function pointSystem(all, resetPressed, star) {
-  if (all) {
-    firstStar.classList.toggle("fa");
-    firstStar.classList.toggle("far");
-    secoundStar.classList.toggle("fa");
-    secoundStar.classList.toggle("far");
-    thirdStar.classList.toggle("fa");
-    thirdStar.classList.toggle("far");
-    fourthStar.classList.toggle("fa");
-    fourthStar.classList.toggle("far");
-    fifthStar.classList.toggle("fa");
-    fifthStar.classList.toggle("far");
-  } else if (resetPressed) {
-
-    firstStar.classList.add("fa");
-    firstStar.classList.remove("far");
-    secoundStar.classList.add("fa");
-    secoundStar.classList.remove("far");
-    thirdStar.classList.add("fa");
-    thirdStar.classList.remove("far");
-    fourthStar.classList.add("fa");
-    fourthStar.classList.remove("far");
-    fifthStar.classList.add("fa");
-    fifthStar.classList.remove("far");
-  } else {
-    star.classList.toggle("fa");
-    star.classList.toggle("far");
-  }
 }
 
 
@@ -174,7 +146,6 @@ function flip(cardMatch, cardOne, cardTwo) {
   }
 };
 
-
 //click action
 function checkMatch() {
   //manipulates the dom to update the moves span number
@@ -199,6 +170,30 @@ function checkMatch() {
     //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
       counter++;
+      //progresses a counter attached to the moves span
+
+        if (counter == 16) {
+          pointSystem(false,firstStar);
+          starRating--;
+          console.log(starRating);
+        } if (counter == 26) {
+          pointSystem(false,secoundStar);
+          starRating--;
+          console.log(starRating);
+        } if (counter == 30) {
+          pointSystem(false,thirdStar);
+          starRating--;
+          console.log(starRating);
+        } if (counter == 36) {
+          pointSystem(false,fourthStar);
+          starRating--;
+          console.log(starRating);
+        } if (counter == 40) {
+          pointSystem(false,fifthStar);
+          starRating--;
+          console.log(starRating);
+        }
+
       //creates letibles that hold the inner classes of the two cards clicked
       let firstCardChild = firstNsecondChildren[0];
       let secondCardChild = firstNsecondChildren[1];
@@ -231,21 +226,26 @@ function checkMatch() {
   }
 }
 
-//progresses a counter attached to the moves span
+function pointSystem(resetAll,star) {
+  if (resetAll) {
+    firstStar.classList.add("fa");
+    firstStar.classList.remove("far");
+    secoundStar.classList.add("fa");
+    secoundStar.classList.remove("far");
+    thirdStar.classList.add("fa");
+    thirdStar.classList.remove("far");
+    fourthStar.classList.add("fa");
+    fourthStar.classList.remove("far");
+    fifthStar.classList.add("fa");
+    fifthStar.classList.remove("far");
+  } else {
+    star.classList.toggle("fa");
+    star.classList.toggle("far");
+  }
+}
 
-if (counter == 8) {
-  pointSystem(false, false, firstStar);
-  starRating--;
-  console.log("counterWorking");
-}
-if (counter == 12) {
-  pointSystem(false, false, secoundStar);
-  starRating--;
-}
-if (counter == 30) {
-  pointSystem(false, false, thirdStar);
-  starRating--;
-}
+
+
 
 
 //adds eventlisteners to all of the cards
