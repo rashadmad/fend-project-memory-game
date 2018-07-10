@@ -58,7 +58,12 @@ resetButton.addEventListener('click', reset);
   clock.appendChild(minHolder);
   clock.appendChild(secHolder);
 
-
+function shufflesDeck(){
+  for (let i = deck.children.length; i >= 0; i--) {
+    deck.appendChild(deck.children[Math.random() * i | 0]);
+  }
+}
+shufflesDeck();
 //shuffles the cards upon page load upon press of the reset button or on page load
 function reset() {
   //resets timer
@@ -78,10 +83,8 @@ function reset() {
   movesText.textContent = counter;
   pointSystem(false, true);
 
-  for (let i = deck.children.length; i >= 0; i--) {
-    deck.appendChild(deck.children[Math.random() * i | 0]);
-  }
-  //checks all of the cards for matchs after finding any it set them back to normal
+  shufflesDeck();
+  //checks all of the cards for matchs after finding any it sets them back to normal
   for (let i = 0; i < cards.length; i++) {
 
     if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
