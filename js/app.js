@@ -26,7 +26,6 @@ const myScorePanel = document.querySelector('.score-panel');
 const minHolder = document.createElement("span");
 const secHolder = document.createElement("span");
 let movesText = document.querySelector('#moves');
-
 const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
 
@@ -36,35 +35,36 @@ let starRating = 0;
 let sec = 0;
 let min = 0;
 
-let timer = setInterval(function(){
-  sec++;
-  if(sec === 60){
-    min++;
-  }
-
-  minHolder.textContent = min + " min";
-  secHolder.textContent = " " + sec + " sec";
-
-}, 1000);
-
-myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
-clock.appendChild(minHolder);
-clock.appendChild(secHolder);
-
-
 resetButton.addEventListener('click', reset);
+
+  let timer = setInterval(function() {
+    sec++
+    if (sec === 60) {
+      sec = 0;
+      min++
+      console.log(min);
+    }
+    secHolder.textContent = " " + sec + " sec";
+    minHolder.textContent = min + " min";
+  }, 1000);
+
+  myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
+  clock.appendChild(minHolder);
+  clock.appendChild(secHolder);
+
 
 //shuffles the cards upon page load upon press of the reset button or on page load
 function reset(overlayOpen) {
+  clearInterval(timer);
+  secHolder.textContent = " " + 0 + " sec";
+  minHolder.textContent = 0 + " min";
   //resets all of these varibles back to there default values
-  sec = 0;
-  min = 0;
   matchsMade = 0;
   starRating = 3;
   //resets the moves counter
   counter = 0;
   movesText.textContent = counter;
-  pointSystem(false,true);
+  pointSystem(false, true);
 
   for (let i = deck.children.length; i >= 0; i--) {
     deck.appendChild(deck.children[Math.random() * i | 0]);
@@ -80,16 +80,20 @@ function reset(overlayOpen) {
 }
 
 ///play agin button starts the game over agin
-function playAgin(){
-document.body.removeChild(overlay);
-reset();
+function playAgin() {
+  document.body.removeChild(overlay);
+  let sec = 0;
+  let min = 0;
+  reset();
 }
 
 function win() {
 
+  let myMin = minHolder.textContent;
+  let mySec = secHolder.textContent;
   clearInterval(timer);
   setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p><p style="font-size: 1.5rem" class="blue">' + ' Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
 
     overlay.innerHTML = str;
@@ -100,23 +104,23 @@ function win() {
   }, 1000);
 }
 
-function pointSystem(all,resetPressed,star){
-if(all){
-  firstStar.classList.toggle("fa");
-  firstStar.classList.toggle("far");
-  secoundStar.classList.toggle("fa");
-  secoundStar.classList.toggle("far");
-  thirdStar.classList.toggle("fa");
-  thirdStar.classList.toggle("far");
-} else if (resetPressed){
+function pointSystem(all, resetPressed, star) {
+  if (all) {
+    firstStar.classList.toggle("fa");
+    firstStar.classList.toggle("far");
+    secoundStar.classList.toggle("fa");
+    secoundStar.classList.toggle("far");
+    thirdStar.classList.toggle("fa");
+    thirdStar.classList.toggle("far");
+  } else if (resetPressed) {
 
-  firstStar.classList.add("fa");
-  firstStar.classList.remove("far");
-  secoundStar.classList.add("fa");
-  secoundStar.classList.remove("far");
-  thirdStar.classList.add("fa");
-  thirdStar.classList.remove("far");
-} else {
+    firstStar.classList.add("fa");
+    firstStar.classList.remove("far");
+    secoundStar.classList.add("fa");
+    secoundStar.classList.remove("far");
+    thirdStar.classList.add("fa");
+    thirdStar.classList.remove("far");
+  } else {
     star.classList.toggle("fa");
     star.classList.toggle("far");
   }
@@ -207,16 +211,16 @@ function checkMatch() {
 
 //progresses a counter attached to the moves span
 
-if (counter==15){
-  pointSystem(false,false,firstStar);
+if (counter == 15) {
+  pointSystem(false, false, firstStar);
   starRating--;
 }
-if (counter==20){
-  pointSystem(false,false,secoundStar);
+if (counter == 20) {
+  pointSystem(false, false, secoundStar);
   starRating--;
 }
-if (counter==30){
-  pointSystem(false,false,thirdStar);
+if (counter == 30) {
+  pointSystem(false, false, thirdStar);
   starRating--;
 }
 
