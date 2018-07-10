@@ -40,7 +40,8 @@ let min = 0;
 
 resetButton.addEventListener('click', reset);
 
-  let timer = setInterval(function() {
+  function addSecounds(){
+
     sec++
     if (sec === 60) {
       sec = 0;
@@ -49,7 +50,9 @@ resetButton.addEventListener('click', reset);
     }
     secHolder.textContent = " " + sec + " sec";
     minHolder.textContent = min + " min";
-  }, 1000);
+}
+
+  var myTimer = setInterval(addSecounds, 1000);
 
   myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
   clock.appendChild(minHolder);
@@ -57,8 +60,14 @@ resetButton.addEventListener('click', reset);
 
 
 //shuffles the cards upon page load upon press of the reset button or on page load
-function reset(overlayOpen) {
-  clearInterval(timer);
+function reset() {
+  //resets timer
+  sec = 0;
+  min = 0;
+  //stop timer
+  clearInterval(myTimer);
+  //starts timer back up
+  myTimer = setInterval(addSecounds, 1000);
   secHolder.textContent = " " + 0 + " sec";
   minHolder.textContent = 0 + " min";
   //resets all of these varibles back to there default values
@@ -85,16 +94,15 @@ function reset(overlayOpen) {
 ///play agin button starts the game over agin
 function playAgin() {
   document.body.removeChild(overlay);
-  let sec = 0;
-  let min = 0;
+  let myMin = minHolder.textContent;
+  let mySec = secHolder.textContent;
   reset();
 }
 
 function win() {
-
+  clearInterval(myTimer);
   let myMin = minHolder.textContent;
   let mySec = secHolder.textContent;
-  clearInterval(timer);
   setTimeout(function() {
     const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
