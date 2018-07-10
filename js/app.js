@@ -18,9 +18,12 @@ const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
 const resetButton = document.querySelector('.fa-repeat');
 const playAginButton = document.createElement("button").textContent = "Play Agin";
+//stars
 const firstStar = document.querySelector('#first');
 const secoundStar = document.querySelector('#secound');
 const thirdStar = document.querySelector('#third');
+const fourthStar = document.querySelector('#fourth');
+const fifthStar = document.querySelector('#fifth');
 const clock = document.createElement("TIME");
 const myScorePanel = document.querySelector('.score-panel');
 const minHolder = document.createElement("span");
@@ -31,7 +34,7 @@ const overlayHeader = document.createElement("h1").textContent = "Congratulation
 
 let counter = 0;
 let matchsMade = 0;
-let starRating = 0;
+let starRating = 5;
 let sec = 0;
 let min = 0;
 
@@ -60,7 +63,7 @@ function reset(overlayOpen) {
   minHolder.textContent = 0 + " min";
   //resets all of these varibles back to there default values
   matchsMade = 0;
-  starRating = 3;
+  starRating = 5;
   //resets the moves counter
   counter = 0;
   movesText.textContent = counter;
@@ -93,7 +96,7 @@ function win() {
   let mySec = secHolder.textContent;
   clearInterval(timer);
   setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p><p style="font-size: 1.5rem" class="blue">' + ' Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     console.log(overlay.parentElement);
 
     overlay.innerHTML = str;
@@ -112,6 +115,10 @@ function pointSystem(all, resetPressed, star) {
     secoundStar.classList.toggle("far");
     thirdStar.classList.toggle("fa");
     thirdStar.classList.toggle("far");
+    fourthStar.classList.toggle("fa");
+    fourthStar.classList.toggle("far");
+    fifthStar.classList.toggle("fa");
+    fifthStar.classList.toggle("far");
   } else if (resetPressed) {
 
     firstStar.classList.add("fa");
@@ -120,6 +127,10 @@ function pointSystem(all, resetPressed, star) {
     secoundStar.classList.remove("far");
     thirdStar.classList.add("fa");
     thirdStar.classList.remove("far");
+    fourthStar.classList.add("fa");
+    fourthStar.classList.remove("far");
+    fifthStar.classList.add("fa");
+    fifthStar.classList.remove("far");
   } else {
     star.classList.toggle("fa");
     star.classList.toggle("far");
@@ -211,11 +222,12 @@ function checkMatch() {
 
 //progresses a counter attached to the moves span
 
-if (counter == 15) {
+if (counter == 8) {
   pointSystem(false, false, firstStar);
   starRating--;
+  console.log("counterWorking");
 }
-if (counter == 20) {
+if (counter == 12) {
   pointSystem(false, false, secoundStar);
   starRating--;
 }
