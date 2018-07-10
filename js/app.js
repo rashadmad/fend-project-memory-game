@@ -52,7 +52,7 @@ resetButton.addEventListener('click', reset);
     minHolder.textContent = min + " min";
 }
 
-  var myTimer = setInterval(addSecounds, 1000);
+let myTimer = setInterval(addSecounds, 1000);
 
   myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
   clock.appendChild(minHolder);
@@ -72,7 +72,6 @@ function reset() {
   //stop timer
   clearInterval(myTimer);
   //starts timer back up
-  myTimer = setInterval(addSecounds, 1000);
   secHolder.textContent = " " + 0 + " sec";
   minHolder.textContent = 0 + " min";
   //resets all of these varibles back to there default values
@@ -96,6 +95,7 @@ function reset() {
 
 ///play agin button starts the game over agin
 function playAgin() {
+  myTimer = setInterval(addSecounds, 1000);
   document.body.removeChild(overlay);
   let myMin = minHolder.textContent;
   let mySec = secHolder.textContent;
@@ -174,9 +174,9 @@ function flip(cardMatch, cardOne, cardTwo) {
   }
 };
 
+
 //click action
 function checkMatch() {
-
   //manipulates the dom to update the moves span number
   movesText.textContent = counter;
   const clicked = this.classList;

@@ -26,15 +26,15 @@ button {
 }
 #congrats {
   position: absolute;
+  top: 10%;
+  left: 0%;
+  right: 0%;
+  margin: 0 auto;
   text-align: center;
   width: 100%;
   background-color: #fff;
   padding: 20px;
-  border-radius: 10px;
   z-index: 100;
-  -moz-box-shadow:     0 0 10px #000000;
-  -webkit-box-shadow:  0 0 10px #000000;
-  box-shadow:          0 0 10px #000000;
 }
 .blue{
   text-align: center;
