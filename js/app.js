@@ -35,13 +35,15 @@ const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
 let overlayStr = "";
 
-let counter = 0;
+let movesCounter = 0;
 let matchsMade = 0;
 let starRating = 5;
 let sec = 0;
 let min = 0;
 let myMin = minHolder.textContent;
 let mySec = secHolder.textContent;
+
+console.log(starRating);
 
 resetButton.addEventListener('click', reset);
 
@@ -79,50 +81,52 @@ function shufflesDeck(){
 
 //shuffles the cards upon page load upon press of the reset button or on page load
 
-///play agin button starts the game over agin
-function playAgin() {
-  myTimer = setInterval(addSecounds, 1000);
-  overlayStr = "";
-  document.body.removeChild(overlay);
-  myMin = minHolder.textContent;
-  mySec = secHolder.textContent;
-  pointSystem(resetAll = true);
-  shufflesDeck()
-}
+  ///play agin button starts the game over agin
+  function playAgin() {
+    //resets timer
+    sec = 0;
+    min = 0;
+    matchsMade = 0;
+    starRating = 5;
+    movesCounter = 0;
+    movesText.textContent = movesCounter;
+    myTimer = setInterval(addSecounds, 1000);
+    overlayStr = "";
+    document.body.removeChild(overlay);
+    myMin = minHolder.textContent;
+    mySec = secHolder.textContent;
+    pointSystem(resetAll = true);
+    shufflesDeck();
+  }
 
 function reset() {
 
-  //resets timer
-  sec = 0;
-  min = 0;
-  matchsMade = 0;
-  starRating = 5;
-  counter = 0;
   //stop timer
   clearInterval(myTimer);
-  overlayStr = '<div id="congrats"><h1>Deck has been shuffled</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+  overlayStr = '<div id="congrats"><h1>Deck has been shuffled</h1><h1>also your time & star</h1><h1> score have been reset</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
   //starts timer back up
   secHolder.textContent = " " + 0 + " sec";
   minHolder.textContent = 0 + " min";
-  movesText.textContent = counter;
+  movesText.textContent = movesCounter;
   document.body.appendChild(overlay);
   overlay.innerHTML = overlayStr;
   overlay.setAttribute("id", "overlay");
   overlay.setAttribute("class", "overlay");
+
 }
 
 function win() {
+  //stop timer
   clearInterval(myTimer);
   myMin = minHolder.textContent;
   mySec = secHolder.textContent;
 
   setTimeout(function() {
-    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
-    pointSystem(true);
+    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + minHolder.textContent + 'utes' + ' and ' + secHolder.textContent + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + movesCounter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br><i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
+    document.body.appendChild(overlay);
     overlay.innerHTML = overlayStr;
     overlay.setAttribute("id", "overlay");
     overlay.setAttribute("class", "overlay");
-    document.body.appendChild(overlay);
 
   }, 1000);
 }
@@ -156,7 +160,7 @@ function flip(cardMatch, cardOne, cardTwo) {
 //click action
 function checkMatch() {
   //manipulates the dom to update the moves span number
-  movesText.textContent = counter;
+  movesText.textContent = movesCounter;
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
   if (clicked.contains("match") || clicked.contains("show")) {
@@ -176,26 +180,26 @@ function checkMatch() {
 
     //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
-      counter++;
+      movesCounter++;
       //progresses a counter attached to the moves span
 
-        if (counter == 16) {
+        if (movesCounter == 16) {
           pointSystem(false,firstStar);
           starRating--;
           console.log(starRating);
-        } if (counter == 26) {
+        } if (movesCounter == 26) {
           pointSystem(false,secoundStar);
           starRating--;
           console.log(starRating);
-        } if (counter == 30) {
+        } if (movesCounter == 30) {
           pointSystem(false,thirdStar);
           starRating--;
           console.log(starRating);
-        } if (counter == 36) {
+        } if (movesCounter == 36) {
           pointSystem(false,fourthStar);
           starRating--;
           console.log(starRating);
-        } if (counter == 40) {
+        } if (movesCounter == 40) {
           pointSystem(false,fifthStar);
           starRating--;
           console.log(starRating);
@@ -231,7 +235,7 @@ function checkMatch() {
       }
     }
   }
-  if (clicked.contains("show")){    
+  if (clicked.contains("show")){
     for (let i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', checkMatch, false);
     }
