@@ -43,7 +43,7 @@ let min = 0;
 let myMin = minHolder.textContent;
 let mySec = secHolder.textContent;
 
-console.log(starRating);
+shufflesDeck()
 
 resetButton.addEventListener('click', reset);
 
