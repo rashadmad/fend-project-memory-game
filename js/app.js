@@ -29,14 +29,19 @@ const myScorePanel = document.querySelector('.score-panel');
 const minHolder = document.createElement("span");
 const secHolder = document.createElement("span");
 let movesText = document.querySelector('#moves');
+//stuff for the overlay
+const overlayContainer = document.querySelector('#congrats');
 const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
+let overlayStr = "";
 
 let counter = 0;
 let matchsMade = 0;
 let starRating = 5;
 let sec = 0;
 let min = 0;
+let myMin = minHolder.textContent;
+let mySec = secHolder.textContent;
 
 resetButton.addEventListener('click', reset);
 
@@ -60,63 +65,65 @@ let myTimer = setInterval(addSecounds, 1000);
 
 function shufflesDeck(){
   for (let i = deck.children.length; i >= 0; i--) {
-    deck.appendChild(deck.children[Math.random() * i | 0]);
-  }
+     deck.appendChild(deck.children[Math.random() * i | 0]);
+   }
+   //checks all of the cards for matchs after finding any it set them back to normal
+   for (let i = 0; i < cards.length; i++) {
+
+     if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
+       console.log("system Fire");
+       cards[i].classList.remove("match", "open", "show");
+     }
+   }
 }
-shufflesDeck();
+
 //shuffles the cards upon page load upon press of the reset button or on page load
-function reset() {
-  //resets timer
-  sec = 0;
-  min = 0;
-  //stop timer
-  clearInterval(myTimer);
-  //starts timer back up
-  secHolder.textContent = " " + 0 + " sec";
-  minHolder.textContent = 0 + " min";
-  //resets all of these varibles back to there default values
-  matchsMade = 0;
-  starRating = 5;
-  //resets the moves counter
-  counter = 0;
-  movesText.textContent = counter;
-
-  pointSystem(true);
-
-  shufflesDeck();
-  //checks all of the cards for matchs after finding any it sets them back to normal
-  for (let i = 0; i < cards.length; i++) {
-
-    if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
-      console.log("system Fire");
-      cards[i].classList.remove("match", "open", "show");
-    }
-  }
-}
 
 ///play agin button starts the game over agin
 function playAgin() {
   myTimer = setInterval(addSecounds, 1000);
+  overlayStr = "";
   document.body.removeChild(overlay);
-  let myMin = minHolder.textContent;
-  let mySec = secHolder.textContent;
-  reset();
+  myMin = minHolder.textContent;
+  mySec = secHolder.textContent;
+  pointSystem(true);
+  shufflesDeck()
+}
+
+function reset() {
+
+  //resets timer
+  sec = 0;
+  min = 0;
+  matchsMade = 0;
+  starRating = 5;
+  counter = 0;
+  //stop timer
+  clearInterval(myTimer);
+  overlayStr = '<div id="congrats"><h1>Deck has been shuffled</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+  //starts timer back up
+  secHolder.textContent = " " + 0 + " sec";
+  minHolder.textContent = 0 + " min";
+  movesText.textContent = counter;
+  document.body.appendChild(overlay);
+  overlay.innerHTML = overlayStr;
+  overlay.setAttribute("id", "overlay");
+  overlay.setAttribute("class", "overlay");
 }
 
 function win() {
   clearInterval(myTimer);
-  let myMin = minHolder.textContent;
-  let mySec = secHolder.textContent;
+  myMin = minHolder.textContent;
+  mySec = secHolder.textContent;
 
   setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
-    console.log(overlay.parentElement);
+    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
     pointSystem(true);
-    overlay.innerHTML = str;
+    overlay.innerHTML = overlayStr;
     overlay.setAttribute("id", "overlay");
     overlay.setAttribute("class", "overlay");
     document.body.appendChild(overlay);
-    const overlayContainer = document.querySelector('#congrats');
+
   }, 1000);
 }
 
