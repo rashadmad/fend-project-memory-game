@@ -86,7 +86,7 @@ function playAgin() {
   document.body.removeChild(overlay);
   myMin = minHolder.textContent;
   mySec = secHolder.textContent;
-  pointSystem(true);
+  pointSystem(resetAll = true);
   shufflesDeck()
 }
 
@@ -117,7 +117,7 @@ function win() {
   mySec = secHolder.textContent;
 
   setTimeout(function() {
-    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + myMin + 'utes' + ' and ' + mySec + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
     pointSystem(true);
     overlay.innerHTML = overlayStr;
     overlay.setAttribute("id", "overlay");
@@ -159,7 +159,7 @@ function checkMatch() {
   movesText.textContent = counter;
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
-  if (clicked.contains("match")) {
+  if (clicked.contains("match") || clicked.contains("show")) {
     this.removeEventListener('click', checkMatch, false);
 
   } else {
@@ -229,6 +229,11 @@ function checkMatch() {
         firstNsecondChildren = [];
         firstNsecond = [];
       }
+    }
+  }
+  if (clicked.contains("show")){    
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', checkMatch, false);
     }
   }
 }
