@@ -122,7 +122,7 @@ function win() {
   mySec = secHolder.textContent;
 
   setTimeout(function() {
-    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">It took you ' + minHolder.textContent + 'utes' + ' and ' + secHolder.textContent + 'ounds' + '</p>' + '<p style="font-size: 1.5rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + movesCounter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br><i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
+    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1rem;" class = "blue">It took you ' + minHolder.textContent + 'utes' + ' and ' + secHolder.textContent + 'ounds' + '</p>' + '<p style="font-size: 1rem;" class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p style="font-size: 1rem;" class = "blue"> it took you ' + movesCounter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br><i style="font-size: 1.5rem;" class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
     document.body.appendChild(overlay);
     overlay.innerHTML = overlayStr;
     overlay.setAttribute("id", "overlay");
