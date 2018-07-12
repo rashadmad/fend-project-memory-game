@@ -41,7 +41,10 @@ button {
 .blue{
   text-align: center;
   color:#33B5E5;
-  font-size: .8em;
+
+}
+p.blue{
+  font-size: 1em;
 }
 
 
@@ -91,6 +94,10 @@ h1 {
 
 }
 
+#overlay.overlay {
+  font-size: 1rem;
+}
+
 .card {
   margin: 1%;
 }
@@ -113,16 +120,17 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    font-size: 1rem;
 }
 
-.deck .card.show {
-    font-size: 33px;
+.deck .card.show{
+    font-size: 1rem;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
+    font-size: 1rem;
 }
 
 /*
@@ -133,6 +141,7 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
+    font-size: 1em;
 }
 
 .score-panel .stars {
@@ -152,7 +161,31 @@ h1 {
     cursor: pointer;
 }
 
+@media screen and (min-width: 651px) {
+  .deck .card.open {
+      font-size: 2rem;
+  }
+
+  .deck .card.show{
+      font-size: 2rem;
+  }
+
+  .deck .card.match {
+      font-size: 2rem;
+  }
+}
 @media screen and (max-width: 650px) {
+  .deck .card.open {
+      font-size: 1.7rem;
+  }
+
+  .deck .card.show{
+      font-size: 1.7rem;
+  }
+
+  .deck .card.match {
+      font-size: 1.7rem;
+  }
   .deck{
     height: 100%;
     background: inherit;
@@ -160,12 +193,39 @@ h1 {
     }
 }
 @media screen and (max-width: 610px) {
+  .deck .card.open {
+      font-size: 2rem;
+  }
+
+  .deck .card.show{
+      font-size: 2rem;
+  }
+
+  .deck .card.match {
+      font-size: 2rem;
+  }
+
 .deck .card {
 
   width: 100px;
   }
+  ul.deck {
+    font-size: .01rem;
+  }
 }
 @media screen and (max-width: 520px) {
+
+  .deck .card.open {
+      font-size: 1.5rem;
+  }
+
+  .deck .card.show{
+      font-size: 1.5rem;
+  }
+
+  .deck .card.match {
+      font-size: 1.5rem;
+  }
 
   .deck .card {
     width: 80px;
@@ -173,12 +233,23 @@ h1 {
     }
 }
 @media screen and (max-width: 412px) {
+
+  .deck .card.open {
+      font-size: 1rem;
+  }
+
+  .deck .card.show{
+      font-size: 1rem;
+  }
+
+  .deck .card.match {
+      font-size: 1rem;
+  }
+
   h1 {
     font-size: 1.3em;
   }
-  .fa, h1.blue {
-    font-size: 1rem;
-  }
+
   .deck .card {
     width: 65px;
     height: 65px;
@@ -188,9 +259,7 @@ h1 {
     }
 }
 @media screen and (max-width: 346px) {
-  .fa-star,  {
-    font-size: .6rem;
-  }
+
   .score-panel {
     width: 280px;
   }
