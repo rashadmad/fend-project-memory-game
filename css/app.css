@@ -2,6 +2,33 @@ html {
     box-sizing: border-box;
 }
 
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 *,
 *::before,
 *::after {
@@ -18,34 +45,39 @@ button {
    box-shadow:          2px 2px 2px #91A691;
 
 }
-.overlay
-{
 
-
-}
 .fa-thumbs-up {
   font-size: 55px;
   margin-bottom: 15px;
   far fa-thumbs-up;
 }
 #congrats {
-  text-align: center;
   position: absolute;
-  top: 26%;
-  left: 30%;
-  right: 30%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  text-align: center;
+  width: 100%;
   background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
   z-index: 100;
-  -moz-box-shadow:     0 0 10px #000000;
-  -webkit-box-shadow:  0 0 10px #000000;
-  box-shadow:          0 0 10px #000000;
 }
+
+#congrats.container {
+  padding: 70px 0;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
 .blue{
   text-align: center;
   color:#33B5E5;
-  font-size: .8em;
+
+}
+p.blue{
+  font-size: 1em;
 }
 
 
@@ -79,8 +111,11 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 100%;
+    max-width: 700px;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 100%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -89,7 +124,15 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+
+}
+
+#overlay.overlay {
+  font-size: 1rem;
+}
+
+.card {
+  margin: 1%;
 }
 
 .deck .card {
@@ -110,16 +153,17 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    font-size: 1rem;
 }
 
-.deck .card.show {
-    font-size: 33px;
+.deck .card.show{
+    font-size: 1rem;
 }
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+    background: #FFA500;
+    font-size: 1rem;
 }
 
 /*
@@ -128,8 +172,9 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 445px;
     margin-bottom: 10px;
+    font-size: .8em;
 }
 
 .score-panel .stars {
@@ -147,4 +192,128 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+@media screen and (min-width: 651px) {
+  .score-panel {
+      font-size: 1.1em;
+      width: 370px;
+  }
+  .deck .card.open {
+      font-size: 2rem;
+  }
+
+  .deck .card.show{
+      font-size: 2rem;
+  }
+
+  .deck .card.match {
+      font-size: 2rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  .score-panel {
+      font-size: 1.1em;
+      width: 370px;
+  }
+  .deck .card.open {
+      font-size: 1.7rem;
+  }
+
+  .deck .card.show{
+      font-size: 1.7rem;
+  }
+
+  .deck .card.match {
+      font-size: 1.7rem;
+  }
+  .deck{
+    height: 100%;
+    background: inherit;
+    box-shadow: inherit;
+    }
+}
+@media screen and (max-width: 610px) {
+  .score-panel {
+      font-size: 1em;
+      width: 370px;
+  }
+  .deck .card.open {
+      font-size: 2rem;
+  }
+
+  .deck .card.show{
+      font-size: 2rem;
+  }
+
+  .deck .card.match {
+      font-size: 2rem;
+  }
+
+.deck .card {
+  width: 100px;
+  height: 100px;
+  }
+  ul.deck {
+    font-size: .01rem;
+  }
+}
+@media screen and (max-width: 520px) {
+
+  .score-panel {
+      font-size: .8em;
+      width: 370px;
+  }
+
+  .deck .card.open {
+      font-size: 1.5rem;
+  }
+
+  .deck .card.show{
+      font-size: 1.5rem;
+  }
+
+  .deck .card.match {
+      font-size: 1.5rem;
+  }
+
+
+}
+@media screen and (max-width: 412px) {
+
+  .deck .card.open {
+      font-size: 1rem;
+  }
+
+  .deck .card.show{
+      font-size: 1rem;
+  }
+
+  .deck .card.match {
+      font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+
+  .deck .card {
+    width: 65px;
+    height: 65px;
+    }
+    .score-panel {
+      width: 300px;
+      font-size: .8em;
+    }
+}
+@media screen and (max-width: 346px) {
+
+  .score-panel {
+    width: 250px;
+  }
+
+  .deck .card {
+    width: 55px;
+    height: 55px;
+    }
 }

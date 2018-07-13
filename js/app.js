@@ -18,87 +18,117 @@ const fontAwe = document.querySelector('.fa');
 const fontAweAll = document.querySelectorAll('.fa');
 const resetButton = document.querySelector('.fa-repeat');
 const playAginButton = document.createElement("button").textContent = "Play Agin";
+//stars
 const firstStar = document.querySelector('#first');
 const secoundStar = document.querySelector('#secound');
 const thirdStar = document.querySelector('#third');
+const fourthStar = document.querySelector('#fourth');
+const fifthStar = document.querySelector('#fifth');
+const clock = document.createElement("TIME");
+const myScorePanel = document.querySelector('.score-panel');
+const minHolder = document.createElement("span");
+const secHolder = document.createElement("span");
 let movesText = document.querySelector('#moves');
-
+//stuff for the overlay
+const overlayContainer = document.querySelector('#congrats');
 const overlay = document.createElement("div");
 const overlayHeader = document.createElement("h1").textContent = "Congratulations";
+let overlayStr = "";
 
-let counter = 0;
+let movesCounter = 0;
 let matchsMade = 0;
-let starRating = 3;
+let starRating = 5;
+let sec = 0;
+let min = 0;
+let myMin = minHolder.textContent;
+let mySec = secHolder.textContent;
 
-resetButton.addEventListener('click', reset, false);
-resetButton.addEventListener('onload', reset, false);
+shufflesDeck()
 
-function completionReset(){
-  overlay.parentElement.removeChild(overlay);
-  console.log("works");
-  reset();
+resetButton.addEventListener('click', reset);
+
+  function addSecounds(){
+
+    sec++
+    if (sec === 60) {
+      sec = 0;
+      min++
+      console.log(min);
+    }
+    secHolder.textContent = " " + sec + " sec";
+    minHolder.textContent = min + " min";
+}
+
+let myTimer = setInterval(addSecounds, 1000);
+
+  myScorePanel.appendChild(clock).innerHTML = '<i style = "font-size: 1.2em; margin-left: 10px; margin-right: 5px" class = "far fa-clock"></i>';
+  clock.appendChild(minHolder);
+  clock.appendChild(secHolder);
+
+function shufflesDeck(){
+  for (let i = deck.children.length; i >= 0; i--) {
+     deck.appendChild(deck.children[Math.random() * i | 0]);
+   }
+   //checks all of the cards for matchs after finding any it set them back to normal
+   for (let i = 0; i < cards.length; i++) {
+
+     if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
+       console.log("system Fire");
+       cards[i].classList.remove("match", "open", "show");
+     }
+   }
 }
 
 //shuffles the cards upon page load upon press of the reset button or on page load
-function reset(overlayOpen) {
-  counter = 0;
-  matchsMade = 0;
-  starRating = 3;
-  movesText = counter.toString();
 
-  pointSystem(false,true);
-
-  for (var i = deck.children.length; i >= 0; i--) {
-    deck.appendChild(deck.children[Math.random() * i | 0]);
+  ///play agin button starts the game over agin
+  function playAgin() {
+    //resets timer
+    sec = 0;
+    min = 0;
+    matchsMade = 0;
+    starRating = 5;
+    movesCounter = 0;
+    movesText.textContent = movesCounter;
+    myTimer = setInterval(addSecounds, 1000);
+    overlayStr = "";
+    document.body.removeChild(overlay);
+    myMin = minHolder.textContent;
+    mySec = secHolder.textContent;
+    pointSystem(resetAll = true);
+    shufflesDeck();
   }
-  //checks all of the cards for matchs after finding any it set them back to normal
-  for (var i = 0; i < cards.length; i++) {
 
-    if (cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")) {
-      console.log("system Fire");
-      cards[i].classList.remove("match", "open", "show");
-    }
-  }
+function reset() {
+
+  //stop timer
+  clearInterval(myTimer);
+  overlayStr = '<div id="congrats"><div class="container"><h1>Deck has been shuffled</h1><h1>also your time & star</h1><h1> score have been reset</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div></div>';
+  //starts timer back up
+  secHolder.textContent = " " + 0 + " sec";
+  minHolder.textContent = 0 + " min";
+  movesText.textContent = movesCounter;
+  document.body.appendChild(overlay);
+  overlay.innerHTML = overlayStr;
+  overlay.setAttribute("id", "overlay");
+  overlay.setAttribute("class", "overlay");
+
 }
 
 function win() {
-  setTimeout(function() {
-    const str = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p style="font-size: 1.5rem;" class = "blue">Your star rating is ' + starRating + '</p>' + '<p style="font-size: 1.5rem;" class = "blue"> it took you ' + counter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br>' + '<i style="font-size: 5rem;" class="blue far fa-thumbs-up"></i>' + '<br>' + '<button onclick = winReset()>Play Again</button>' + '</div>';
-    console.log(overlay.parentElement);
+  //stop timer
+  clearInterval(myTimer);
+  myMin = minHolder.textContent;
+  mySec = secHolder.textContent;
 
-    overlay.innerHTML = str;
+  setTimeout(function() {
+    overlayStr = '<div id="congrats"><h1>Congratulations You win.</h1>' + '<h1>' + 'Here is your score.</h1>' + '<p class = "blue">It took you ' + minHolder.textContent + 'utes' + ' and ' + secHolder.textContent + 'ounds' + '</p>' + '<p class = "blue">to complete, your star rating is ' + starRating + '</p>' + '<p class = "blue"> it took you ' + movesCounter + ' moves to finsh</p>' + '<h1>Thank you for playing</h1>' + '<h1>Would you like to play agin?</h1><br><i class="blue far fa-thumbs-up"></i><br><button style="cursor: pointer;" onclick = playAgin()>Play Again</button></div>';
+    document.body.appendChild(overlay);
+    overlay.innerHTML = overlayStr;
     overlay.setAttribute("id", "overlay");
     overlay.setAttribute("class", "overlay");
-    document.body.appendChild(overlay);
-    const overlayContainer = document.querySelector('#congrats');
+
   }, 1000);
-}
-
-function winReset(){
-  document.body.removeChild(overlay);
-  reset();
-}
-
-function pointSystem(all,resetPressed,star){
-if(all){
-  firstStar.classList.toggle("fa");
-  firstStar.classList.toggle("far");
-  secoundStar.classList.toggle("fa");
-  secoundStar.classList.toggle("far");
-  thirdStar.classList.toggle("fa");
-  thirdStar.classList.toggle("far");
-} else if (resetPressed){
-
-  firstStar.classList.add("fa");
-  firstStar.classList.remove("far");
-  secoundStar.classList.add("fa");
-  secoundStar.classList.remove("far");
-  thirdStar.classList.add("fa");
-  thirdStar.classList.remove("far");
-} else {
-    star.classList.toggle("fa");
-    star.classList.toggle("far");
-  }
 }
 
 
@@ -129,28 +159,14 @@ function flip(cardMatch, cardOne, cardTwo) {
 
 //click action
 function checkMatch() {
-  //progresses a counter attached to the moves span
-  counter++;
-
-  if (counter==30){
-    pointSystem(false,false,firstStar);
-    starRating--;
-  }
-  if (counter==40){
-    pointSystem(false,false,secoundStar);
-    starRating--;
-  }
-  if (counter==60){
-    pointSystem(false,false,thirdStar);
-    starRating--;
-  }
-
   //manipulates the dom to update the moves span number
-  movesText = document.querySelector('#moves').textContent = counter;
-
+  movesText.textContent = movesCounter;
   const clicked = this.classList;
   //makeing matched cards not apply as eventlisteners
-  else {
+  if (clicked.contains("match") || clicked.contains("show")) {
+    this.removeEventListener('click', checkMatch, false);
+
+  } else {
     //flips the card over
     this.classList.toggle("show");
     this.classList.toggle("open");
@@ -164,8 +180,32 @@ function checkMatch() {
 
     //this finds out when two cards have been clicked
     if (firstNsecond.length === 2) {
+      movesCounter++;
+      //progresses a counter attached to the moves span
 
-      //creates varibles that hold the inner classes of the two cards clicked
+        if (movesCounter == 16) {
+          pointSystem(false,firstStar);
+          starRating--;
+          console.log(starRating);
+        } if (movesCounter == 26) {
+          pointSystem(false,secoundStar);
+          starRating--;
+          console.log(starRating);
+        } if (movesCounter == 30) {
+          pointSystem(false,thirdStar);
+          starRating--;
+          console.log(starRating);
+        } if (movesCounter == 36) {
+          pointSystem(false,fourthStar);
+          starRating--;
+          console.log(starRating);
+        } if (movesCounter == 40) {
+          pointSystem(false,fifthStar);
+          starRating--;
+          console.log(starRating);
+        }
+
+      //creates letibles that hold the inner classes of the two cards clicked
       let firstCardChild = firstNsecondChildren[0];
       let secondCardChild = firstNsecondChildren[1];
       let firstCard = firstNsecond[0].classList;
@@ -195,16 +235,38 @@ function checkMatch() {
       }
     }
   }
+  if (clicked.contains("show")){
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', checkMatch, false);
+    }
+  }
 }
 
-//adds eventlisteners to all of the cards
-for (var i = 0; i < cards.length; i++) {
-
-  if(cards[i].classList.contains("match") || cards[i].classList.contains("open") || cards[i].classList.contains("show")){
-    cards[i].removeEventListner('click', checkMatch, false);
+function pointSystem(resetAll,star) {
+  if (resetAll) {
+    firstStar.classList.add("fa");
+    firstStar.classList.remove("far");
+    secoundStar.classList.add("fa");
+    secoundStar.classList.remove("far");
+    thirdStar.classList.add("fa");
+    thirdStar.classList.remove("far");
+    fourthStar.classList.add("fa");
+    fourthStar.classList.remove("far");
+    fifthStar.classList.add("fa");
+    fifthStar.classList.remove("far");
   } else {
-    cards[i].addEventListener('click', checkMatch, false);
+    star.classList.toggle("fa");
+    star.classList.toggle("far");
   }
+}
+
+
+
+
+
+//adds eventlisteners to all of the cards
+for (let i = 0; i < cards.length; i++) {
+  cards[i].addEventListener('click', checkMatch, false);
 }
 
 
