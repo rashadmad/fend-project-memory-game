@@ -2,19 +2,27 @@
 
 ## Table of Contents
 
+* [intro](#intro)
+* [view](#view)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
+## Intro
+
+I Rashad Madison have completed this project for my Udacity Nanodegree.
+
+## View
+
+If you like to take a look at the project go to this url https://rashadmad.github.io/fend-project-memory-game/ .
+
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This project is a continuation of a starter project through the Udacity program. I would suggest using the starter project that they provide, not mine.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Though if you would like to learn from how I attacked the project just fork this project to your repo.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+I will most likely will not accept pull requests.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+For details, check out https://github.com/udacity/fend-project-memory-game.
