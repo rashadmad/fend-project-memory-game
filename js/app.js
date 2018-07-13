@@ -103,7 +103,7 @@ function reset() {
 
   //stop timer
   clearInterval(myTimer);
-  overlayStr = '<div id="congrats"><h1>Deck has been shuffled</h1><h1>also your time & star</h1><h1> score have been reset</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div>';
+  overlayStr = '<div id="congrats"><div class="container"><h1>Deck has been shuffled</h1><h1>also your time & star</h1><h1> score have been reset</h1><p>are you ready to play?</p><button style="cursor: pointer;" onclick = playAgin()>Play Again</button>' + '</div></div>';
   //starts timer back up
   secHolder.textContent = " " + 0 + " sec";
   minHolder.textContent = 0 + " min";

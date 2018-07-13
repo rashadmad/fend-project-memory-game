@@ -2,6 +2,33 @@ html {
     box-sizing: border-box;
 }
 
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 *,
 *::before,
 *::after {
@@ -26,18 +53,24 @@ button {
 }
 #congrats {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0%;
-  right: 0%;
-  height = auto;
-  margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   text-align: center;
   width: 100%;
   background-color: #fff;
-  padding: 20px;
   z-index: 100;
 }
+
+#congrats.container {
+  padding: 70px 0;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
 .blue{
   text-align: center;
   color:#33B5E5;
@@ -129,7 +162,7 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #FFA500;
     font-size: 1rem;
 }
 
@@ -139,9 +172,9 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 445px;
     margin-bottom: 10px;
-    font-size: 1em;
+    font-size: .8em;
 }
 
 .score-panel .stars {
@@ -162,6 +195,10 @@ h1 {
 }
 
 @media screen and (min-width: 651px) {
+  .score-panel {
+      font-size: 1.1em;
+      width: 370px;
+  }
   .deck .card.open {
       font-size: 2rem;
   }
@@ -175,6 +212,10 @@ h1 {
   }
 }
 @media screen and (max-width: 650px) {
+  .score-panel {
+      font-size: 1.1em;
+      width: 370px;
+  }
   .deck .card.open {
       font-size: 1.7rem;
   }
@@ -193,6 +234,10 @@ h1 {
     }
 }
 @media screen and (max-width: 610px) {
+  .score-panel {
+      font-size: 1em;
+      width: 370px;
+  }
   .deck .card.open {
       font-size: 2rem;
   }
@@ -206,14 +251,19 @@ h1 {
   }
 
 .deck .card {
-
   width: 100px;
+  height: 100px;
   }
   ul.deck {
     font-size: .01rem;
   }
 }
 @media screen and (max-width: 520px) {
+
+  .score-panel {
+      font-size: .8em;
+      width: 370px;
+  }
 
   .deck .card.open {
       font-size: 1.5rem;
@@ -227,10 +277,7 @@ h1 {
       font-size: 1.5rem;
   }
 
-  .deck .card {
-    width: 80px;
-    height: 80px;
-    }
+
 }
 @media screen and (max-width: 412px) {
 
@@ -255,13 +302,14 @@ h1 {
     height: 65px;
     }
     .score-panel {
-      width: 310px;
+      width: 300px;
+      font-size: .8em;
     }
 }
 @media screen and (max-width: 346px) {
 
   .score-panel {
-    width: 280px;
+    width: 250px;
   }
 
   .deck .card {
