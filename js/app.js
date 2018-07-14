@@ -64,7 +64,7 @@ function delayClick(){
     for (let i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', checkMatch, false);
     }
-  }, 1000);
+  }, 700);
 }
 
 shufflesDeck()
@@ -182,7 +182,7 @@ function flip(cardMatch, cardOne, cardTwo) {
       cardTwo.toggle("open");
       cardTwo.toggle("show");
 
-    }, 1000);
+    }, 700);
   }
 };
 
