@@ -121,6 +121,10 @@ function shufflesDeck(){
     mySec = secHolder.textContent;
     pointSystem(resetAll = true);
     shufflesDeck();
+    //emptys out the arrays
+    firstNsecondChildren = [];
+    firstNsecond = [];
+    flip(true, firstCard);
   }
 
 function reset() {
