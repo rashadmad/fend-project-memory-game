@@ -161,12 +161,43 @@ h1 {
     font-size: 1rem;
 }
 
+.card {
+  -webkit-transition:all 0.2s ease-in;
+  -moz-transition:all 0.2s ease-in;
+  -ms-transition:all 0.2s ease-in;
+  -o-transition:all 0.2s ease-in;
+  transition:all 0.2s ease-in;
+}
+
 .deck .card.match {
     cursor: default;
     font-size: 1rem;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
     -webkit-transition: background-color 0.5s ease-out; /* Safari */
     transition: background-color 0.5s ease-out;
     background-color: #FFA500;
+
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(0px, -2px, 0px);
+  }
+
+  20%, 80% {
+    transform: translate3d(0px, 2px, 0px);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(0, -5px, 0px);
+  }
+
+  40%, 60% {
+    transform: translate3d(0px, 4px, 0px);
+  }
 }
 
 /*
