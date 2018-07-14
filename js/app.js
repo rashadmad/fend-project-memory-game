@@ -64,7 +64,7 @@ function delayClick(){
     for (let i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', checkMatch, false);
     }
-  }, 1000);
+  }, 700);
 }
 
 shufflesDeck()
@@ -176,13 +176,24 @@ function flip(cardMatch, cardOne, cardTwo) {
   } else {
     //this delay allows the user to see the secound card clicked before flipinng
     //it back over
-    setTimeout(function() {
-      cardOne.toggle("open");
-      cardOne.toggle("show");
-      cardTwo.toggle("open");
-      cardTwo.toggle("show");
 
-    }, 1000);
+    //flip Back
+    setTimeout(function() {
+      cardOne.add("show");
+      cardTwo.add("show");
+      cardOne.remove("open");
+      cardTwo.remove("open");
+      console.log("yo");
+      setTimeout(function() {
+        //show red
+        cardOne.remove("show");
+        cardTwo.remove("show");
+        cardOne.remove("open");
+        cardTwo.remove("open");
+        cardOne.remove("match");
+        cardTwo.remove("match");
+      }, 1000);
+    }, 0);
   }
 };
 
@@ -197,7 +208,6 @@ function checkMatch() {
 
   } else {
     //flips the card over
-    this.classList.toggle("show");
     this.classList.toggle("open");
 
     //creates two arrays to hold the cards that were clicked and the classes of
