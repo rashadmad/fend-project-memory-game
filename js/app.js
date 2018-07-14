@@ -43,6 +43,30 @@ let min = 0;
 let myMin = minHolder.textContent;
 let mySec = secHolder.textContent;
 
+function canClick(){
+  //adds eventlisteners to all of the cards
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', checkMatch, false);
+  }
+}
+function cantClick(){
+  //adds eventlisteners to all of the cards
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].removeEventListener('click', checkMatch, false);
+  }
+}
+
+function delayClick(){
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].removeEventListener('click', checkMatch, false);
+  }
+  setTimeout(function() {
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', checkMatch, false);
+    }
+  }, 700);
+}
+
 shufflesDeck()
 
 resetButton.addEventListener('click', reset);
@@ -97,6 +121,10 @@ function shufflesDeck(){
     mySec = secHolder.textContent;
     pointSystem(resetAll = true);
     shufflesDeck();
+    //emptys out the arrays
+    firstNsecondChildren = [];
+    firstNsecond = [];
+    flip(true, firstCard);
   }
 
 function reset() {
@@ -153,7 +181,8 @@ function flip(cardMatch, cardOne, cardTwo) {
       cardOne.toggle("show");
       cardTwo.toggle("open");
       cardTwo.toggle("show");
-    }, 1000);
+
+    }, 700);
   }
 };
 
@@ -204,13 +233,13 @@ function checkMatch() {
           starRating--;
           console.log(starRating);
         }
-
-      //creates letibles that hold the inner classes of the two cards clicked
+        delayClick();
+      //creates varibles that hold the inner classes of the two cards clicked
+      //basically defines what the cards are so they can be compared
       let firstCardChild = firstNsecondChildren[0];
       let secondCardChild = firstNsecondChildren[1];
       let firstCard = firstNsecond[0].classList;
       let secondCard = firstNsecond[1].classList;
-
       //this checks if the two cards match
       if (firstCardChild === secondCardChild) {
 
@@ -227,20 +256,18 @@ function checkMatch() {
         firstNsecond = [];
         //if the cards dont match they need to both be fliped over
       } else {
-
+        //after two cards have been clicked this stage goes into effect
         flip(false, firstCard, secondCard);
         //emptys out the arrays
         firstNsecondChildren = [];
         firstNsecond = [];
+
       }
     }
   }
-  if (clicked.contains("show")){
-    for (let i = 0; i < cards.length; i++) {
-      cards[i].addEventListener('click', checkMatch, false);
-    }
-  }
 }
+
+canClick();
 
 function pointSystem(resetAll,star) {
   if (resetAll) {
@@ -258,15 +285,6 @@ function pointSystem(resetAll,star) {
     star.classList.toggle("fa");
     star.classList.toggle("far");
   }
-}
-
-
-
-
-
-//adds eventlisteners to all of the cards
-for (let i = 0; i < cards.length; i++) {
-  cards[i].addEventListener('click', checkMatch, false);
 }
 
 
