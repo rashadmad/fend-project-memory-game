@@ -34,6 +34,7 @@ html {
 *::after {
     box-sizing: inherit;
 }
+
 button {
    background-color: #33B5E5; /* Blue */
    color: white;
@@ -162,8 +163,10 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #FFA500;
     font-size: 1rem;
+    -webkit-transition: background-color 0.5s ease-out; /* Safari */
+    transition: background-color 0.5s ease-out;
+    background-color: #FFA500;
 }
 
 /*
