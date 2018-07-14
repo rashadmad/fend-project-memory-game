@@ -260,6 +260,11 @@ h1 {
 }
 @media screen and (max-width: 520px) {
 
+  .deck .card {
+    width: 80px;
+    height: 80px;
+    }
+
   .score-panel {
       font-size: .8em;
       width: 370px;
